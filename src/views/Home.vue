@@ -3,10 +3,10 @@
     <section class="welcome">
       <div class="welcome-message">
         <h1 class="title">US Accidents</h1>
-        <h2 class="subtitle">
+        <h4 class="subtitle">
           Esta aplicación provee una interfaz gráfica para mostrar los datos procesados por la
           <a class="api-link" target="_blank" href="https://github.com/Skydler/US-accidents-API">API de US Accidents</a>.
-        </h2>
+        </h4>
         <p class="description">
           Aplicación parte del trabajo final de la asignatura Base de Datos 2, de la Facultad de Informática de la Universidad Nacional de La Plata.<br><br>
           <span class="students">Integrantes:</span> Almandos - Mandarino
@@ -50,7 +50,7 @@ export default {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #ff8080;
+  background-color: var(--lightRed);
   flex: 1 1 100%;
 }
 
@@ -66,7 +66,7 @@ export default {
 
 .title {
   font-weight: 600;
-  color: #f06969;
+  color: var(--darkRed);
 }
 
 .subtitle {
@@ -77,7 +77,7 @@ export default {
 .api-link {
   text-decoration: none;
   font-weight: bold;
-  color: #ff8080;
+  color: var(--lightRed);
 }
 
 .api-link:hover {
@@ -85,18 +85,12 @@ export default {
   color: black;
 }
 
-.description {
-  line-height: 1.2;
-  margin-top: 10px;
-  color: #555;
-}
-
 .map-button {
   text-decoration: none;
   font-size: 1rem;
   margin-top: 30px;
   border: 1px solid transparent;
-  background-color: #ff8080;
+  background-color: var(--lightRed);
   padding: 10px 30px;
   border-radius: 10px;
   color: white;
@@ -108,8 +102,8 @@ export default {
 
 .map-button:hover {
   background-color: white;
-  border: 1px solid #ff8080;
-  color: #ff8080;
+  border: 1px solid var(--lightRed);
+  color: var(--lightRed);
 }
 
 .map-link {
