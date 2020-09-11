@@ -9,6 +9,56 @@
         </li>
       </ul>
       <h2 class="subtitle">Información adicional</h2>
+      <section class="information">
+        <h3 class="description">Temperatura más común</h3>
+        <div class="graph">
+          <div class="graph-value" v-for="value in values" :key="value.name">
+            <span
+              class="bar"
+              :style="{'width': (value.value * 100 / barPixels) + 'px'}"
+            >
+              {{value.value}}
+            </span>
+            <span class="bar-value">{{value.name}}</span>
+          </div>
+        </div>
+        <h3 class="description">Estado con más accidentes</h3>
+        <div class="graph">
+          <div class="graph-value" v-for="value in values" :key="value.name">
+            <span
+              class="bar"
+              :style="{'width': (value.value * 100 / barPixels) + 'px'}"
+            >
+              {{value.value}}
+            </span>
+            <span class="bar-value">{{value.name}}</span>
+          </div>
+        </div>
+        <h3 class="description">Ciudad con más accidentes</h3>
+        <div class="graph">
+          <div class="graph-value" v-for="value in values" :key="value.name">
+            <span
+              class="bar"
+              :style="{'width': (value.value * 100 / barPixels) + 'px'}"
+            >
+              {{value.value}}
+            </span>
+            <span class="bar-value">{{value.name}}</span>
+          </div>
+        </div>
+        <h3 class="description">Clima más común</h3>
+        <div class="graph">
+          <div class="graph-value" v-for="value in values" :key="value.name">
+            <span
+              class="bar"
+              :style="{'width': (value.value * 100 / barPixels) + 'px'}"
+            >
+              {{value.value}}
+            </span>
+            <span class="bar-value">{{value.name}}</span>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>
@@ -18,6 +68,21 @@ export default {
   name: 'Panel',
   data() {
     return {
+      barPixels: 3000,
+      values: [
+        {
+          name: '40°',
+          value: '3000'
+        },
+        {
+          name: '39°',
+          value: '2500'
+        },
+        {
+          name: '32°',
+          value: '2000'
+        }
+      ],
       options: [
         {
           name: 'Mostrar los 5 puntos más peligrosos',
@@ -45,7 +110,7 @@ export default {
 
 .panel {
   background-color: rgba(255, 255, 255, 0.5);
-  border-left: 6px solid var(--darkRed);
+  border-left: 15px solid var(--darkRed);
   border-radius: 20px;
   position: absolute;
   right: 25px;
@@ -88,6 +153,40 @@ export default {
 .radio {
   margin-right: 8px;
   border: 1px solid var(--darkRed);
+}
+
+.information {
+  margin-top: 20px;
+}
+
+.bar {
+  margin-right: 10px;
+  background-color: var(--lightRed);
+  color: white;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  font-size: 0.7rem;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bar-value {
+  font-size: 1rem;
+  color: var(--grey);
+}
+
+.graph-value {
+  height: 1.3rem;
+  display: flex;
+  align-items: center;
+}
+
+.graph {
+  margin-top: 10px;
 }
 
 </style>
