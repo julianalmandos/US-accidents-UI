@@ -31,9 +31,6 @@ export default {
       zoom: 3,
       center: L.latLng(47.41322, -1.219482)
     }
-  },
-  mounted() {
-    console.log(L.latLng(47.41322, -1.219482));
   }
 };
 </script>

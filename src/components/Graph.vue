@@ -29,9 +29,6 @@ export default {
     getMaxValue(values) {
       return values.map(value => value.count).sort((a, b) => b-a)[0];
     }
-  },
-  mounted() {
-    console.log(this.values);
   }
 }
 </script>

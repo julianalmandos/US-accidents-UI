@@ -6,7 +6,7 @@
       <div :class="['subtitle-container', !graphsReady ? 'subtitle-loading-container' : 'subtitle-result-container']">
         <h2 class="subtitle">Información adicional</h2>
         <img v-if="!graphsReady" class="loading-icon" src='@/assets/loading.svg'/>
-        <span v-else class="time-counter">{{audit.queryTime}}</span>
+        <span v-else class="time-counter">Query time: {{audit.queryTime}} <span v-if="audit.cached">(cached)</span></span>
       </div>
       <section v-if="graphsReady" class="information">
         <Graph v-for="graph in readyGraphs" :key="graph.name" :values="graph.value">
@@ -36,7 +36,8 @@ export default {
       audit: {
         startTime: null,
         endTime: null,
-        queryTime: '5.923ms'
+        queryTime: '5.923ms',
+        cached: false
       },
       graphs: [
         {
@@ -69,19 +70,42 @@ export default {
     }
   },
   mounted() {
-    this.audit.startTime = new Date();
-    axios.all(this.getApiCalls())
-      .then(axios.spread((...responses) => {
-        responses.forEach((response, index) => {
-          this.graphs[index].value = response.data[this.graphs[index].name];
-          this.graphs[index].ready = true;
-        });
-        this.graphsReady = true;
-        this.audit.endTime = new Date();
-        this.setQueryTime();
-      }));
+    if (localStorage.getItem('data')) {
+      this.runQuery(this.getDataFromLocalStorage);
+    } else {
+      this.runQuery(this.getDataFromApi);
+    }
   },
   methods: {
+    async runQuery(callback) {
+      this.audit.startTime = new Date();
+      await callback();
+      this.audit.endTime = new Date();
+      this.graphsReady = true;
+      this.setQueryTime();
+    },
+    getDataFromLocalStorage() {
+      return new Promise((res, rej) => {
+        const responses = localStorage.getItem('data');
+        JSON.parse(responses).forEach(this.setDataFromResponse);
+        this.audit.cached = true;
+        res();
+      });
+    },
+    getDataFromApi() {
+      return new Promise((res, rej) => {
+        axios.all(this.getApiCalls())
+          .then(axios.spread((...responses) => {
+            responses.forEach(this.setDataFromResponse);
+            localStorage.setItem('data', JSON.stringify(responses));
+            res();
+          }));
+      });
+    },
+    setDataFromResponse(response, index) {
+      this.graphs[index].value = response.data[this.graphs[index].name];
+      this.graphs[index].ready = true;
+    },
     getApiCalls() {
       return this.graphs.reduce((acc, graph) => {
         return [
@@ -162,6 +186,7 @@ export default {
 .subtitle-container {
   display: flex;
   margin-top: 20px;
+  white-space: nowrap;
 }
 
 .subtitle-result-container {
@@ -172,6 +197,8 @@ export default {
   color: var(--grey);
   margin-left: 10px;
   font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;  
 }
 
 </style>
