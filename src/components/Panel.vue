@@ -16,11 +16,10 @@
           <button class="btn-submit" type="submit" v-on:click="submit">Buscar</button>
         </div>
       </div>
-
-      <h2 class="subtitle">Información adicional</h2>
       <div
         :class="['subtitle-container', !graphsReady ? 'subtitle-loading-container' : 'subtitle-result-container']"
       >
+        <h2 class="subtitle">Información adicional</h2>
         <img v-if="!graphsReady" class="loading-icon" src="@/assets/loading.svg" />
         <span v-else class="time-counter">
           Query time: {{audit.queryTime}}
@@ -64,7 +63,7 @@ export default {
           api: "/mostCommonConditions/weather",
           name: "Temperature",
           ready: false,
-          title: "Temperatura más común",
+          title: "Temperatura más común (°F)",
           value: [],
         },
         // {
@@ -110,18 +109,6 @@ export default {
     } else {
       this.runQuery(this.getDataFromApi);
     }
-    this.audit.startTime = new Date();
-    axios.all(this.getApiCalls()).then(
-      axios.spread((...responses) => {
-        responses.forEach((response, index) => {
-          this.graphs[index].value = response.data[this.graphs[index].name];
-          this.graphs[index].ready = true;
-        });
-        this.graphsReady = true;
-        this.audit.endTime = new Date();
-        this.setQueryTime();
-      })
-    );
   },
   methods: {
     async runQuery(callback) {
@@ -163,6 +150,9 @@ export default {
       this.audit.queryTime =
         this.audit.endTime.getTime() - this.audit.startTime.getTime() + "ms";
     },
+    submit() {
+
+    }
   },
 };
 </script>
