@@ -2,20 +2,7 @@
   <div class="panel">
     <div class="container">
       <h1 class="title">Panel de Control</h1>
-      <div class="param-container">
-        <p
-          class="description"
-        >Ingrese un par de coordenadas y un radio para mostrar los accidentes en dicha zona:</p>
-        <ul class="options-list">
-          <li v-for="param in parameters" :key="param.name" class="option">
-            <span class="param">{{param.name}}:</span>
-            <input class="input" type="number" name="option" v-model="param.value" />
-          </li>
-        </ul>
-        <div class="btn-container">
-          <button class="btn-submit" type="submit" v-on:click="submit">Buscar</button>
-        </div>
-      </div>
+      <CoordsSearcher v-on="$listeners"/>
       <div
         :class="['subtitle-container', !graphsReady ? 'subtitle-loading-container' : 'subtitle-result-container']"
       >
@@ -38,6 +25,7 @@
 
 <script>
 import Graph from "@/components/Graph.vue";
+import CoordsSearcher from "@/components/CoordsSearcher.vue";
 import accidentsApi from "@/gateways/accidents-api.js";
 import axios from "axios";
 
@@ -45,6 +33,7 @@ export default {
   name: "Panel",
   components: {
     Graph,
+    CoordsSearcher,
   },
   data() {
     return {
@@ -80,21 +69,6 @@ export default {
         //   title: 'Clima más común',
         //   value: []
         // }
-      ],
-
-      parameters: [
-        {
-          name: "Longitud",
-          value: "",
-        },
-        {
-          name: "Latitud",
-          value: "",
-        },
-        {
-          name: "Radio",
-          value: "",
-        },
       ],
     };
   },
@@ -150,9 +124,6 @@ export default {
       this.audit.queryTime =
         this.audit.endTime.getTime() - this.audit.startTime.getTime() + "ms";
     },
-    submit() {
-
-    }
   },
 };
 </script>
@@ -189,19 +160,6 @@ export default {
   font-size: 1.4rem;
 }
 
-.options-list {
-  list-style: none;
-  margin: 20px 0 0 20px;
-}
-
-.option {
-  margin-bottom: 8px;
-}
-
-.input {
-  border: 1px solid var(--darkRed);
-}
-
 .loading-icon {
   width: auto;
   height: 1.4rem;
@@ -228,21 +186,5 @@ export default {
   font-size: 0.9rem;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-.param {
-  width: 100px;
-  display: inline-block;
-  margin-right: auto;
-}
-
-.btn-submit {
-  width: 70%;
-  display: inline-block;
-}
-
-.btn-container {
-  margin-top: 10px;
-  margin-bottom: 15px;
-  text-align: center;
 }
 </style>
