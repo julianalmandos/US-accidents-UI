@@ -5,7 +5,7 @@ import Map from '../views/Map.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'Home',

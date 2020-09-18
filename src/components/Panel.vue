@@ -2,7 +2,7 @@
   <div class="panel">
     <div class="container">
       <h1 class="title">Panel de Control</h1>
-      <CoordsSearcher v-on="$listeners"/>
+      <CoordsSearcher v-on="$listeners" />
       <div
         :class="['subtitle-container', !graphsReady ? 'subtitle-loading-container' : 'subtitle-result-container']"
       >
@@ -55,20 +55,20 @@ export default {
           title: "Temperatura más común (°F)",
           value: [],
         },
-        // {
-        //   api: '/mostCommonConditions/location',
-        //   name: 'State',
-        //   ready: false,
-        //   title: 'Estado con más accidentes',
-        //   value: []
-        // },
-        // {
-        //   api: '/mostCommonConditions/weather',
-        //   name: 'Weather',
-        //   ready: false,
-        //   title: 'Clima más común',
-        //   value: []
-        // }
+        {
+          api: "/mostCommonConditions/location",
+          name: "State",
+          ready: false,
+          title: "Estado con más accidentes",
+          value: [],
+        },
+        {
+          api: "/mostCommonConditions/weather",
+          name: "Weather",
+          ready: false,
+          title: "Clima más común",
+          value: [],
+        },
       ],
     };
   },

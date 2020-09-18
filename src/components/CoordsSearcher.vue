@@ -3,14 +3,19 @@
     <p
       class="description"
     >Ingrese un par de coordenadas y un radio para mostrar los accidentes en dicha zona:</p>
-    <ul class="options-list">
-      <li class="option" v-for="(value, name, index) in parameters" :key="index">
-        <span class="param">{{name}}:</span>
-        <input class="input" type="number" name="option" v-model="parameters[name]" />
-      </li>
-    </ul>
-    <div class="btn-container">
-      <button class="btn-submit" type="submit" @click="submit">Buscar</button>
+    <div class="form-container">
+      <ul class="options-list">
+        <li class="option" v-for="(value, name, index) in parameters" :key="index">
+          <span class="param">{{name}}:</span>
+          <input class="input" type="number" name="option" v-model="parameters[name]" />
+        </li>
+      </ul>
+      <div class="btn-container">
+        <button class="btn-submit" type="submit" @click="submit">Buscar</button>
+        <small
+          class="advice"
+        >* Las consultas están limitadas a 40 elementos por cuestiones de performance</small>
+      </div>
     </div>
   </div>
 </template>
@@ -55,13 +60,15 @@ export default {
 
 .btn-submit {
   width: 70%;
-  display: inline-block;
+  display: block;
 }
 
 .btn-container {
   margin-top: 10px;
   margin-bottom: 15px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .input {
@@ -70,5 +77,17 @@ export default {
 
 .description {
   margin-bottom: 1em;
+}
+
+.advice {
+  margin-top: 5px;
+  font-size: 0.6em;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
 </style>
