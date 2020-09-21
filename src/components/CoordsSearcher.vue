@@ -58,7 +58,15 @@ export default {
         let coords = response.data.map((element) =>
           element.Start_Loc.coordinates.reverse()
         );
-        this.$emit("update-marks", coords);
+        let data = {
+          coords: coords,
+          parameters: {
+            longitude: long,
+            latitude: lat,
+            radius: rad,
+          },
+        };
+        this.$emit("update-marks", data);
         this.$emit('loading-markers', false);
         if (response.data.length === 0) {
           console.log('llega');
