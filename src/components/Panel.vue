@@ -137,7 +137,7 @@ export default {
   right: 25px;
   width: 23%;
   min-height: 80%;
-  z-index: 9999;
+  z-index: 2;
   display: flex;
   justify-content: center;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
@@ -172,7 +172,7 @@ export default {
 
 .subtitle-container {
   display: flex;
-  margin-top: 20px;
+  margin-top: 5px;
   white-space: nowrap;
 }
 

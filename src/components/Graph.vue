@@ -1,6 +1,6 @@
 <template>
   <div class="graph">
-    <h3 class="description">
+    <h3 id="graph-title" class="description">
       <slot name="title"></slot>
     </h3>
     <div>
@@ -36,5 +36,9 @@ export default {
 <style>
 .graph {
   margin-top: 10px;
+}
+
+#graph-title {
+  margin: 0;
 }
 </style>
