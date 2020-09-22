@@ -4,12 +4,13 @@
     <Panel @update-marks="updateMarks" @loading-markers="toggleLoadingMarkers" />
     <l-map class="map" ref="myMap" :zoom="zoom" :center="center" :markerZoomAnimation="true">
       <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker v-for="(mark, index) in markers" :key="index" :lat-lng="mark" />
+      <l-marker v-for="(mark, index) in markers" :key="index" :lat-lng="mark" :icon="greyIcon"/>
       <l-circle
         v-if="circle.center"
         :lat-lng="circle.center"
         :radius="circle.radius"
         :color="circle.color"
+        :fillColor="circle.fillColor"
       />
     </l-map>
   </div>
@@ -41,9 +42,22 @@ export default {
       circle: {
         center: null,
         radius: 0,
-        color: "red",
+        color: "#ff8080",
+        fillColor: "#ff8080"
       }
     };
+  },
+  computed: {
+    greyIcon() {
+      return new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });
+    }
   },
   methods: {
     updateMarks(data) {
@@ -61,7 +75,7 @@ export default {
     },
     toggleLoadingMarkers(enable) {
       this.loadingMarkers = enable;
-    }
+    },
   },
 };
 </script>
