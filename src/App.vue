@@ -35,4 +35,32 @@ h4 {
   margin-top: 10px;
   color: var(--grey);
 }
+
+.button {
+  text-decoration: none;
+  font-size: 1rem;
+  border: 1px solid transparent;
+  background-color: var(--lightRed);
+  padding: 5px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+.button:hover {
+  background-color: white;
+  border: 1px solid var(--lightRed);
+  color: var(--lightRed);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 </style>

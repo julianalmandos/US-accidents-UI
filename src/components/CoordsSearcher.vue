@@ -6,12 +6,12 @@
     <div class="form-container">
       <ul class="options-list">
         <li class="option" v-for="(value, name, index) in parameters" :key="index">
-          <span class="param">{{name}}:</span>
+          <label for="option" class="param">{{name}}:</label>
           <input class="input" type="number" name="option" v-model="parameters[name]" @input="setError"/>
         </li>
       </ul>
       <div class="btn-container">
-        <button class="btn-submit" type="submit" @click="submit">Buscar</button>
+        <button class="button btn-submit" type="submit" @click="submit">Buscar</button>
         <small
           v-if="status.error"
           class="advice error"
@@ -94,11 +94,11 @@ export default {
   width: 100px;
   display: inline-block;
   margin-right: auto;
+  color: var(--grey);
 }
 
 .btn-submit {
   width: 70%;
-  display: block;
 }
 
 .btn-container {
@@ -111,6 +111,12 @@ export default {
 
 .input {
   border: 1px solid var(--darkRed);
+  border-radius: 5px;
+  padding: 3px 3px;
+}
+
+.option:not(:last-child) {
+  margin-bottom: 8px;
 }
 
 .description {

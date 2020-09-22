@@ -11,7 +11,7 @@
           Aplicación parte del trabajo final de la asignatura Base de Datos 2, de la Facultad de Informática de la Universidad Nacional de La Plata.<br><br>
           <span class="students">Integrantes:</span> Almandos - Mandarino
         </p>
-        <router-link class="map-link" to="/map"><button class="map-button"><i class="eos-icons map-icon">map</i> Ver mapa</button></router-link>
+        <router-link class="map-link" to="/map"><button class="button map-button"><i class="eos-icons map-icon">map</i> Ver mapa</button></router-link>
       </div>
     </section>
     <section class="image-container">
@@ -86,24 +86,8 @@ export default {
 }
 
 .map-button {
-  text-decoration: none;
-  font-size: 1rem;
-  margin-top: 30px;
-  border: 1px solid transparent;
-  background-color: var(--lightRed);
-  padding: 10px 30px;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-
   display: flex;
   align-items: center;
-}
-
-.map-button:hover {
-  background-color: white;
-  border: 1px solid var(--lightRed);
-  color: var(--lightRed);
 }
 
 .map-link {
