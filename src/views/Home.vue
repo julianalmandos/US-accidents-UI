@@ -15,7 +15,7 @@
       </div>
     </section>
     <section class="image-container">
-      <!--img class="flag" alt="US Flag" src="@/assets/us-flag2.png"-->
+      <img class="preview" alt="App Preview" src="@/assets/screenshot.png">
     </section>
   </div>
 </template>
@@ -54,9 +54,9 @@ export default {
   flex: 1 1 100%;
 }
 
-.flag {
-  height: auto;
-  width: 800px;
+.preview {
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .welcome-message {
