@@ -1,10 +1,10 @@
 <template>
   <div class="map-container">
-    <LoadingMarkers v-if="loadingMarkers"/>
+    <LoadingMarkers v-if="loadingMarkers" />
     <Panel @update-marks="updateMarks" @loading-markers="toggleLoadingMarkers" />
-    <l-map class="map" ref="myMap" :zoom="zoom" :center="center" :markerZoomAnimation="true">
+    <l-map class="map" ref="myMap" :zoom="zoom" :markerZoomAnimation="true">
       <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker v-for="(mark, index) in markers" :key="index" :lat-lng="mark" :icon="greyIcon"/>
+      <l-marker v-for="(mark, index) in markers" :key="index" :lat-lng="mark" :icon="greyIcon" />
       <l-circle
         v-if="circle.center"
         :lat-lng="circle.center"
@@ -20,7 +20,7 @@
 import L from "leaflet";
 import { LMap, LTileLayer, LMarker, LCircle } from "vue2-leaflet";
 import Panel from "@/components/Panel.vue";
-import LoadingMarkers from '@/components/LoadingMarkers.vue';
+import LoadingMarkers from "@/components/LoadingMarkers.vue";
 
 export default {
   name: "MyAwesomeMap",
@@ -30,34 +30,35 @@ export default {
     LMarker,
     LCircle,
     Panel,
-    LoadingMarkers
+    LoadingMarkers,
   },
   data() {
     return {
       url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
       zoom: 3,
-      center: L.latLng(47.41322, -1.219482),
       markers: [],
       loadingMarkers: false,
       circle: {
         center: null,
         radius: 0,
         color: "#ff8080",
-        fillColor: "#ff8080"
-      }
+        fillColor: "#ff8080",
+      },
     };
   },
   computed: {
     greyIcon() {
       return new L.Icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconUrl:
+          "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png",
+        shadowUrl:
+          "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
         iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
-        shadowSize: [41, 41]
+        shadowSize: [41, 41],
       });
-    }
+    },
   },
   methods: {
     updateMarks(data) {
